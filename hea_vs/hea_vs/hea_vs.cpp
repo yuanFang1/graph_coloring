@@ -2,12 +2,12 @@
 //
 
 #include "stdafx.h"
-#define MaxIter 15000
+
 #define MaxPoint 1002
 #define MaxColor 300
 #define P 20
 using namespace std;
-
+int MaxIter = 16000;
 typedef struct P_sol {
 	int psol[MaxColor][MaxPoint];
 	int num[MaxColor];
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		P_sol temps;
-
+		int cnt = 0;
 		while (popu.min_f != 0) {
 			int p1 = rand() % P + 1, p2;
 			do {
@@ -153,6 +153,7 @@ int main(int argc, char *argv[])
 				popu.min_f = f;
 				popu.min_p = max_p;
 			}
+			
 			cout << "mint_f = " << popu.min_f << endl;
 		}
 	}
@@ -163,7 +164,7 @@ int main(int argc, char *argv[])
 		fp = fopen(".\\result.txt", "a+");
 		if (fp == NULL)
 			printf("output file open error\n");
-		fprintf(fp, "%s %-9s %-12d %lf\n", argv[1], argv[2], res_iter, res_time);
+		fprintf(fp, "%s %-9s %-15lf %-7d\n", argv[1], argv[2], res_time , MaxIter);
 	}
 	else
 		cout << "overtime" << endl;
